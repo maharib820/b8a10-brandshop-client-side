@@ -41,8 +41,8 @@ const Navbar = () => {
                 }
 
                 <div className="col-span-1 flex justify-end items-center gap-3 md:gap-5 lg:gap-6 mt-4 lg:mt-0">
-                    <Link><div className="flex items-center"><CiUser className="text-3xl mr-2 font-bold"></CiUser><p className="font-semibold">Sign in</p></div></Link>
-                    <Link><div className="flex items-center"><BsBag className="text-2xl mr-2 font-bold"></BsBag><p className="font-semibold">Shopping bag</p></div></Link>
+                    <Link to={"/login"}><div className="flex items-center"><CiUser className="text-3xl mr-2 font-bold"></CiUser><p className="font-semibold">Sign in</p></div></Link>
+                    <Link to={"/register"}><div className="flex items-center"><BsBag className="text-2xl mr-2 font-bold"></BsBag><p className="font-semibold">Shopping bag</p></div></Link>
                 </div>
             </div>
             <div className="hidden lg:flex justify-center">

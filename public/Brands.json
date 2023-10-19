@@ -1,0 +1,32 @@
+[
+  {
+    "id": 1,
+    "brandName": "Nike",
+    "brandImage": "https://i.ibb.co/WvPX5jd/nike.jpg"
+  },
+  {
+    "id": 2,
+    "brandName": "Gucci",
+    "brandImage": "gucci.jpg"
+  },
+  {
+    "id": 3,
+    "brandName": "H&M",
+    "brandImage": "hm.jpg"
+  },
+  {
+    "id": 4,
+    "brandName": "Louis Vuitton",
+    "brandImage": "louisvuitton.jpg"
+  },
+  {
+    "id": 5,
+    "brandName": "Adidas",
+    "brandImage": "adidas.jpg"
+  },
+  {
+    "id": 6,
+    "brandName": "Zara",
+    "brandImage": "zara.jpg"
+  }
+]
