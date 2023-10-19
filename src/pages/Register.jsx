@@ -1,11 +1,17 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { useContext } from "react";
+import { AuthContext } from "../AuthProvider/AuthProvider";
+import { updateProfile } from "firebase/auth";
 
 const Register = () => {
 
     const toastt = (value) => toast(value, { position: toast.POSITION.TOP_CENTER })
+
+    const { createUser, logOut } = useContext(AuthContext);
+    const navigate = useNavigate();
 
     const handleRegister = e => {
         e.preventDefault();
@@ -28,7 +34,19 @@ const Register = () => {
             return;
         }
 
-        console.log(name, photo, email, password);
+        createUser(email, password)
+            .then(r => {
+                console.log(r.user);
+                updateProfile(r.user, {
+                    displayName: name,
+                    photoURL: photo
+                })
+                    .then()
+                    .catch()
+                logOut();
+                navigate("/login")
+            })
+            .catch(e => toastt(e.message));
     }
 
     return (
