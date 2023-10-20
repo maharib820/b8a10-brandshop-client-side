@@ -14,6 +14,7 @@ import AboutUs from './pages/AboutUs';
 import Membership from './pages/Membership';
 import AuthProvider from './AuthProvider/AuthProvider';
 import AddProduct from './pages/AddProduct';
+import Brands from './pages/Brands';
 
 const router = createBrowserRouter([
   {
@@ -46,9 +47,13 @@ const router = createBrowserRouter([
         element: <Membership></Membership>
       },
       {
-        path: "addproduct",
+        path: "/addproduct",
         element: <AddProduct></AddProduct>,
         loader: () => fetch("./Brands.json")
+      },
+      {
+        path: "/brands/:name",
+        element: <Brands></Brands>
       }
     ]
   },
