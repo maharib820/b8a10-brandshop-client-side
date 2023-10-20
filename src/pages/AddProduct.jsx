@@ -1,5 +1,5 @@
 import { useLoaderData } from "react-router-dom";
-
+import Swal from 'sweetalert2'
 
 const AddProduct = () => {
 
@@ -15,7 +15,29 @@ const AddProduct = () => {
         const rating = form.rating.value;
         const photo = form.photo.value;
         const description = form.description.value;
-        console.log(brand, product, type, price, rating, photo, description);
+        const newProduct = { brand, product, type, price, rating, photo, description }
+        console.log(newProduct);
+
+        fetch("http://localhost:5000/addnewproduct/", {
+            method: "POST",
+            headers: {
+                "content-type": "application/json"
+            },
+            body: JSON.stringify(newProduct)
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+                if (data.insertedId) {
+                    Swal.fire({
+                        title: 'Success',
+                        text: 'Product added successfully',
+                        icon: 'success',
+                        confirmButtonText: 'Ok'
+                    })
+                    form.reset();
+                }
+            })
     }
 
     return (
@@ -25,7 +47,7 @@ const AddProduct = () => {
                 <form className="text-center" onSubmit={handleAddProduct}>
 
                     {/* row 1 */}
-                    <div className="w-full mb-4">
+                    <div className="w-full mb-2">
                         <label className="label">
                             <span className="label-text font-bold">Brand Name</span>
                         </label>
@@ -37,7 +59,7 @@ const AddProduct = () => {
                     </div>
 
                     {/* row 2 */}
-                    <div className="md:flex gap-4 mb-4">
+                    <div className="md:flex gap-4 mb-2">
                         <div className="form-control md:w-1/2">
                             <label className="label">
                                 <span className="label-text font-bold">Product Name</span>
@@ -57,7 +79,7 @@ const AddProduct = () => {
                     </div>
 
                     {/* row 3 */}
-                    <div className="md:flex gap-4 mb-4">
+                    <div className="md:flex gap-4 mb-2">
                         <div className="form-control md:w-1/2">
                             <label className="label">
                                 <span className="label-text font-bold">Price</span>
@@ -77,7 +99,7 @@ const AddProduct = () => {
                     </div>
 
                     {/* form row 4 */}
-                    <div className="mb-4">
+                    <div className="mb-2">
                         <div className="form-control w-full">
                             <label className="label">
                                 <span className="label-text font-bold">Photo URL</span>
@@ -89,7 +111,7 @@ const AddProduct = () => {
                     </div>
 
                     {/* row 4 */}
-                    <div className="mb-4">
+                    <div className="mb-2">
                         <div className="form-control w-full">
                             <label className="label">
                                 <span className="label-text font-bold">Short description</span>
