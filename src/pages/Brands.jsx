@@ -10,7 +10,6 @@ import { Navigation, Pagination, Mousewheel, Keyboard } from 'swiper/modules';
 const Brands = () => {
 
     const datas = useLoaderData();
-    console.log(datas);
 
     return (
         <div>

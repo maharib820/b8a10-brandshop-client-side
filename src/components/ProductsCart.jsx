@@ -1,8 +1,6 @@
-const ProductsCart = ({ data }) => {
+import { Link, Navigate } from "react-router-dom";
 
-    const handleDetails = e => {
-        console.log(e);
-    }
+const ProductsCart = ({ data }) => {
 
     return (
         <div>
@@ -15,7 +13,7 @@ const ProductsCart = ({ data }) => {
                     <p>Price ${data.price}</p>
                     <p>Rating {data.rating}</p>
                     <div className="card-actions">
-                        <button onClick={() => handleDetails(data.product)} className="btn btn-primary">Details</button>
+                        <Link to={`/details/${data.product}`}><button className="btn btn-primary">Details</button></Link>
                     </div>
                 </div>
             </div>
