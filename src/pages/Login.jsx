@@ -1,11 +1,21 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { useContext } from "react";
+import { AuthContext } from "../AuthProvider/AuthProvider";
+import { GoogleAuthProvider, getAuth, signInWithPopup } from "firebase/auth";
+import app from "../firebase/firebase.start";
 
 const Login = () => {
 
     const toastt = (value) => toast(value, { position: toast.POSITION.TOP_CENTER })
+
+    const { signIn } = useContext(AuthContext);
+    const navigate = useNavigate();
+    const provider = new GoogleAuthProvider();
+    const location = useLocation();
+    const auth = getAuth(app);
 
     const handleLogin = e => {
         e.preventDefault();
@@ -26,6 +36,20 @@ const Login = () => {
             toastt("Password must contain a special character")
             return;
         }
+
+        signIn(email, password)
+            .then(() => {
+                navigate(location?.state ? location.state : "/")
+            })
+            .catch(e => toastt(e.message));
+    }
+
+    const googleSignIn = () => {
+        signInWithPopup(auth, provider)
+            .then(() => {
+                navigate(location?.state ? location.state : "/")
+            })
+            .catch(e => toastt(e.message));
     }
 
     return (
@@ -52,7 +76,7 @@ const Login = () => {
                 <p className="text-center font-bold">Do not have an acoount ? <Link className="font-bold text-blue-600" to={"/register"}>Sign Up</Link></p>
                 <div className="mt-3">
                     <h2 className="text-center font-bold">Or</h2>
-                    <FcGoogle className="mx-auto text-5xl mt-3"></FcGoogle>
+                    <FcGoogle onClick={googleSignIn} className="mx-auto text-5xl mt-3"></FcGoogle>
                 </div>
             </div>
             <ToastContainer></ToastContainer>

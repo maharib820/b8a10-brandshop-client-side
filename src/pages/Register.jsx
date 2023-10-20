@@ -4,7 +4,8 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useContext } from "react";
 import { AuthContext } from "../AuthProvider/AuthProvider";
-import { updateProfile } from "firebase/auth";
+import { GoogleAuthProvider, getAuth, signInWithPopup, updateProfile } from "firebase/auth";
+import app from "../firebase/firebase.start";
 
 const Register = () => {
 
@@ -12,6 +13,8 @@ const Register = () => {
 
     const { createUser, logOut } = useContext(AuthContext);
     const navigate = useNavigate();
+    const auth = getAuth(app);
+    const provider = new GoogleAuthProvider();
 
     const handleRegister = e => {
         e.preventDefault();
@@ -45,6 +48,14 @@ const Register = () => {
                     .catch()
                 logOut();
                 navigate("/login")
+            })
+            .catch(e => toastt(e.message));
+    }
+
+    const googleSignIn = () => {
+        signInWithPopup(auth, provider)
+            .then(() => {
+                navigate("/")
             })
             .catch(e => toastt(e.message));
     }
@@ -85,7 +96,7 @@ const Register = () => {
                 <p className="text-center font-bold">Already have an acoount ? <Link className="font-bold text-blue-600" to={"/login"}>Sign In</Link></p>
                 <div className="mt-3">
                     <h2 className="text-center font-bold">Or</h2>
-                    <FcGoogle className="mx-auto text-5xl mt-3"></FcGoogle>
+                    <FcGoogle onClick={googleSignIn} className="mx-auto text-5xl mt-3"></FcGoogle>
                 </div>
                 <ToastContainer></ToastContainer>
             </div>

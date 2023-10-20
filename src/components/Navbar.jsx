@@ -2,21 +2,25 @@ import { CiUser } from "react-icons/ci";
 import { BsBag, } from "react-icons/bs";
 import { AiOutlineClose } from "react-icons/ai";
 import { BiMenuAltLeft } from "react-icons/bi";
+import { IoIosLogOut } from "react-icons/io";
 import { Link, NavLink, useLocation } from "react-router-dom";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { AuthContext } from "../AuthProvider/AuthProvider";
 
 const Navbar = () => {
 
     const location = useLocation();
 
     const [open, setOpen] = useState(false);
+    const { user, logOut, loading } = useContext(AuthContext);
 
     const links =
         <>
             <li><NavLink className={location.pathname === '/' ? 'text-[#e50010] font-bold' : ""} to={"/"}>Home</NavLink></li>
+            <li><NavLink className={location.pathname === '/addproduct' ? 'text-[#e50010] font-bold' : ""} to={"/addproduct"}>Add Product</NavLink></li>
+            <li><NavLink className={location.pathname === '/membership' ? 'text-[#e50010] font-bold' : ""} to={"/membership"}>Membership for free shipping</NavLink></li>
             <li><NavLink className={location.pathname === '/customerservice' ? 'text-[#e50010] font-bold' : ""} to={"/customerservice"}>Customer Service</NavLink></li>
             <li><NavLink className={location.pathname === '/aboutus' ? 'text-[#e50010] font-bold' : ""} to={"/aboutus"}>About Us</NavLink></li>
-            <li><NavLink className={location.pathname === '/membership' ? 'text-[#e50010] font-bold' : ""} to={"/membership"}>Membership for free shipping</NavLink></li>
         </>
 
     return (
@@ -41,8 +45,20 @@ const Navbar = () => {
                 }
 
                 <div className="col-span-1 flex justify-end items-center gap-3 md:gap-5 lg:gap-6 mt-4 lg:mt-0">
-                    <Link to={"/login"}><div className="flex items-center"><CiUser className="text-3xl mr-2 font-bold"></CiUser><p className="font-semibold">Sign in</p></div></Link>
-                    <Link to={"/register"}><div className="flex items-center"><BsBag className="text-2xl mr-2 font-bold"></BsBag><p className="font-semibold">Shopping bag</p></div></Link>
+                    {
+                        loading ? <span className="loading loading-ring loading-lg mt-[6px]"></span>
+                        :
+                        (
+                            user ?
+                            <div className="flex items-center mt-[6px] gap-1 lg:gap-3">
+                                <img className="h-12 w-12 rounded-full" src={user.photoURL} alt="" />
+                                <button onClick={logOut} className="font-semibold"><IoIosLogOut className="text-3xl mr-2 font-bold inline"></IoIosLogOut>Log out</button>
+                            </div>
+                            :
+                            <Link to={"/login"}><div className="flex items-center"><CiUser className="text-3xl mr-2 font-bold"></CiUser><p className="font-semibold">Sign in</p></div></Link>
+                        )
+                    }
+                    <Link><div className="flex items-center"><BsBag className="text-2xl mr-2 font-bold"></BsBag><p className="font-semibold">Shopping bag</p></div></Link>
                 </div>
             </div>
             <div className="hidden lg:flex justify-center">
@@ -50,7 +66,7 @@ const Navbar = () => {
                     {links}
                 </ul>
             </div>
-        </div>
+        </div >
     );
 };
 

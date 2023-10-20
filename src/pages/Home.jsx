@@ -3,8 +3,13 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import { Navigation, Pagination, Mousewheel, Keyboard } from 'swiper/modules';
+import { useLoaderData } from 'react-router-dom';
 
 const Home = () => {
+
+    const brands = useLoaderData();
+    console.log(brands);
+
     return (
         <div>
             <div className='w-8/12 mx-auto h-[720px] flex justify-center items-center bg-[#F4F4F4] my-14'>

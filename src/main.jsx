@@ -13,6 +13,7 @@ import CustomerService from './pages/CustomerService';
 import AboutUs from './pages/AboutUs';
 import Membership from './pages/Membership';
 import AuthProvider from './AuthProvider/AuthProvider';
+import AddProduct from './pages/AddProduct';
 
 const router = createBrowserRouter([
   {
@@ -21,7 +22,8 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: <Home></Home>
+        element: <Home></Home>,
+        loader: () => fetch("./Brands.json")
       },
       {
         path: "/login",
@@ -42,6 +44,11 @@ const router = createBrowserRouter([
       {
         path: "/membership",
         element: <Membership></Membership>
+      },
+      {
+        path: "addproduct",
+        element: <AddProduct></AddProduct>,
+        loader: () => fetch("./Brands.json")
       }
     ]
   },
