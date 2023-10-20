@@ -29,8 +29,8 @@ const Navbar = () => {
                 <div className="col-span-1 flex justify-end items-center font-lobster">
                     {
                         open ?
-                        <button onClick={() => setOpen(!open)}><AiOutlineClose className="text-3xl mr-2 lg:hidden"></AiOutlineClose></button> :
-                        <button onClick={() => setOpen(!open)}><BiMenuAltLeft className="text-4xl mr-2 lg:hidden"></BiMenuAltLeft></button>     
+                            <button onClick={() => setOpen(!open)}><AiOutlineClose className="text-3xl mr-2 lg:hidden"></AiOutlineClose></button> :
+                            <button onClick={() => setOpen(!open)}><BiMenuAltLeft className="text-4xl mr-2 lg:hidden"></BiMenuAltLeft></button>
                     }
                     <h2 className="italic text-4xl lg:text-5xl font-semibold text-[#e50010]">R<span className="text-lg">&</span>T</h2>
                 </div>
@@ -47,18 +47,19 @@ const Navbar = () => {
                 <div className="col-span-1 flex justify-end items-center gap-3 md:gap-5 lg:gap-6 mt-4 lg:mt-0">
                     {
                         loading ? <span className="loading loading-ring loading-lg mt-[6px]"></span>
-                        :
-                        (
-                            user ?
-                            <div className="flex items-center mt-[6px] gap-1 lg:gap-3">
-                                <img className="h-12 w-12 rounded-full" src={user.photoURL} alt="" />
-                                <button onClick={logOut} className="font-semibold"><IoIosLogOut className="text-3xl mr-2 font-bold inline"></IoIosLogOut>Log out</button>
-                            </div>
                             :
-                            <Link to={"/login"}><div className="flex items-center"><CiUser className="text-3xl mr-2 font-bold"></CiUser><p className="font-semibold">Sign in</p></div></Link>
-                        )
+                            (
+                                user ?
+                                    <div className="flex items-center mt-[6px] gap-1 lg:gap-3">
+                                        <p className="font-semibold">{user.displayName}</p>
+                                        <img className="h-12 w-12 rounded-full" src={user.photoURL} alt="" />
+                                        <div onClick={logOut}><button className="font-semibold"><IoIosLogOut className="text-3xl mr-2 font-bold inline"></IoIosLogOut><span className="hidden lg:flex">Log out</span></button></div>
+                                    </div>
+                                    :
+                                    <Link to={"/login"}><div className="flex items-center"><CiUser className="text-3xl mr-2 font-bold"></CiUser><p className="font-semibold">Sign in</p></div></Link>
+                            )
                     }
-                    <Link><div className="flex items-center"><BsBag className="text-2xl mr-2 font-bold"></BsBag><p className="font-semibold">Shopping bag</p></div></Link>
+                    <Link><div className="flex items-center"><BsBag className="text-2xl mr-2 font-bold"></BsBag><p className="font-semibold"><span className="hidden xl:flex">Shopping bag</span></p></div></Link>
                 </div>
             </div>
             <div className="hidden lg:flex justify-center">

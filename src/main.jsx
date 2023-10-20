@@ -15,6 +15,8 @@ import Membership from './pages/Membership';
 import AuthProvider from './AuthProvider/AuthProvider';
 import AddProduct from './pages/AddProduct';
 import Brands from './pages/Brands';
+import PrivateRoute from './Private/PrivateRoute';
+import Details from './pages/Details';
 
 const router = createBrowserRouter([
   {
@@ -24,7 +26,7 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <Home></Home>,
-        loader: () => fetch("./Brands.json")
+        loader: () => fetch("../Brands.json")
       },
       {
         path: "/login",
@@ -53,7 +55,12 @@ const router = createBrowserRouter([
       },
       {
         path: "/brands/:name",
-        element: <Brands></Brands>
+        element: <Brands></Brands>,
+        loader: ({ params }) => fetch(`http://localhost:5000/brands/${params.name}`)
+      },
+      {
+        path: "/details/:product",
+        element: <Details></Details>
       }
     ]
   },
