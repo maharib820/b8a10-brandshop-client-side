@@ -59,7 +59,9 @@ const Navbar = () => {
                                     <Link to={"/login"}><div className="flex items-center"><CiUser className="text-3xl mr-2 font-bold"></CiUser><p className="font-semibold">Sign in</p></div></Link>
                             )
                     }
-                    <Link><div className="flex items-center"><BsBag className="text-2xl mr-2 font-bold"></BsBag><p className="font-semibold"><span className="hidden xl:flex">Shopping bag</span></p></div></Link>
+                    {
+                        <Link to={`/mycart/`}><div className="flex items-center"><BsBag className="text-2xl mr-2 font-bold"></BsBag><p className="font-semibold"><span className="hidden xl:flex">Cart</span></p></div></Link>
+                    }
                 </div>
             </div>
             <div className="hidden lg:flex justify-center">
