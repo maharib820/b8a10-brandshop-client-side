@@ -26,7 +26,14 @@ const AData = ({ d, dataa, setDataa }) => {
     }
     return (
         <div className="flex items-center gap-8">
-            <div className="flex-1 text-right font-bold">{d.cart}</div>
+            <div className='flex-1 bg-slate-400 p-5 m-5'>
+                <div className='flex justify-center'>
+                    <img className='h-[200px] w-[250px] text-center' src={d.photo} alt="" />
+                </div>
+                <div className="text-center font-bold">Product: {d.cart}</div>
+                <div className="text-center font-bold">Type: {d.type}</div>
+                <div className="text-center font-bold">Price: {d.price}</div>
+            </div>
             <div className="flex-1"><button onClick={() => handleDelete(d._id)} className="btn bg-red-600 text-white">X</button></div>
         </div>
     );

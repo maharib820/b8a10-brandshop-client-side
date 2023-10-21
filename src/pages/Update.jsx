@@ -1,10 +1,14 @@
 import { useLoaderData } from "react-router-dom";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Update = () => {
 
     const mdata = useLoaderData();
     // const mdata = data[0];
     // console.log(mdata);
+
+    const notify = () => toast("Data updated successfully", {position: toast.POSITION.TOP_CENTER});
 
     const handleUpdateSubmit = e => {
         e.preventDefault();
@@ -28,7 +32,10 @@ const Update = () => {
         })
             .then(res => res.json())
             .then(data => {
-                console.log(data);
+                console.log(data.modifiedCount);
+                if(data.modifiedCount > 0){
+                    notify();
+                }
             })
     }
 
@@ -115,6 +122,7 @@ const Update = () => {
                     <input className="btn btn-block bg-[#e50010] my-4 mb-10 text-white" type="submit" value="Update Product" />
                 </form>
             </div>
+            <ToastContainer></ToastContainer>
         </div>
     );
 };

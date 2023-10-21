@@ -15,7 +15,14 @@ const Details = () => {
         console.log(user.email);
         const email = user.email;
         const cart = data.product;
-        const iCart = { email, cart };
+        const photo = data.photo;
+        const price = data.price;
+        const type = data.type;
+        const brand = data.brand;
+        const rating = data.rating;
+        const description = data.description;
+
+        const iCart = { email, cart, photo, price, type, brand, rating, description };
         console.log(iCart);
         fetch("https://randf-server.vercel.app/cart", {
             method: "POST",

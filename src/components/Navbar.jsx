@@ -1,5 +1,5 @@
 import { CiUser } from "react-icons/ci";
-import { BsBag, BsLightbulb } from "react-icons/bs";
+import { BsBag, BsSun, BsMoon } from "react-icons/bs";
 import { AiOutlineClose } from "react-icons/ai";
 import { BiMenuAltLeft } from "react-icons/bi";
 import { IoIosLogOut } from "react-icons/io";
@@ -72,7 +72,9 @@ const Navbar = () => {
                     {
                         <Link to={`/mycart/`}><div className="flex items-center"><BsBag className="text-2xl mr-2 font-bold"></BsBag><p className="font-semibold"><span className="hidden xl:flex">Cart</span></p></div></Link>
                     }
-                    <button onClick={handleLight}><BsLightbulb className="text-3xl"></BsLightbulb></button>
+                    {
+                        theme ? <button onClick={handleLight}><BsSun className="text-3xl"></BsSun></button> : <button onClick={handleLight}><BsMoon className="text-3xl"></BsMoon></button>
+                    } 
                 </div>
             </div>
             <div className="hidden lg:flex justify-center">
