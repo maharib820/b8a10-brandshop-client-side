@@ -60,12 +60,12 @@ const router = createBrowserRouter([
       {
         path: "/brands/:name",
         element: <Brands></Brands>,
-        loader: ({ params }) => fetch(`http://localhost:5000/brands/${params.name}`)
+        loader: ({ params }) => fetch(`https://randf-server.vercel.app/brands/${params.name}`)
       },
       {
         path: "/details/:product",
         element: <PrivateRoute><Details></Details></PrivateRoute>,
-        loader: ({params}) => fetch(`http://localhost:5000/products/${params.product}`)
+        loader: ({params}) => fetch(`https://randf-server.vercel.app/products/${params.product}`)
       },
       {
         path: "/mycart/",
@@ -74,7 +74,7 @@ const router = createBrowserRouter([
       {
         path: "/myupdate/:product",
         element: <PrivateRoute><Update></Update></PrivateRoute>,
-        loader: ({params}) => fetch(`http://localhost:5000/update/${params.product}`)
+        loader: ({params}) => fetch(`https://randf-server.vercel.app/update/${params.product}`)
       }
     ]
   },

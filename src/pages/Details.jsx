@@ -17,7 +17,7 @@ const Details = () => {
         const cart = data.product;
         const iCart = { email, cart };
         console.log(iCart);
-        fetch("http://localhost:5000/cart", {
+        fetch("https://randf-server.vercel.app/cart", {
             method: "POST",
             headers: {
                 "content-type": "application/json"

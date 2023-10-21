@@ -18,7 +18,7 @@ const AddProduct = () => {
         const newProduct = { brand, product, type, price, rating, photo, description }
         console.log(newProduct);
 
-        fetch("http://localhost:5000/addnewproduct/", {
+        fetch("https://randf-server.vercel.app/addnewproduct/", {
             method: "POST",
             headers: {
                 "content-type": "application/json"

@@ -13,7 +13,7 @@ const MyCart = () => {
     useEffect(() => {
         const myemail = user?.email;
         setEmail(myemail)
-        fetch(`http://localhost:5000/mycart/${email}`)
+        fetch(`https://randf-server.vercel.app/mycart/${email}`)
             .then(res => res.json())
             .then(data => setDataa(data))
     }, [email, user?.email])
@@ -24,7 +24,7 @@ const MyCart = () => {
         <div className="mt-20">
             <h2 className="text-center mb-8 text-2xl font-bold">Added Items</h2>
             {
-                dataa.map((d, index) => <AData key={index} d={d} dataa={dataa} setDataa={setDataa}></AData>)
+                dataa?.map((d, index) => <AData key={index} d={d} dataa={dataa} setDataa={setDataa}></AData>)
             }
         </div>
     );

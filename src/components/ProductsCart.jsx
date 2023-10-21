@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import PropTypes from 'prop-types';
 
 const ProductsCart = ({ data }) => {
 
@@ -23,3 +24,7 @@ const ProductsCart = ({ data }) => {
 };
 
 export default ProductsCart;
+
+ProductsCart.propTypes = {
+    data: PropTypes.object
+}

@@ -1,10 +1,10 @@
 import { CiUser } from "react-icons/ci";
-import { BsBag, } from "react-icons/bs";
+import { BsBag, BsLightbulb } from "react-icons/bs";
 import { AiOutlineClose } from "react-icons/ai";
 import { BiMenuAltLeft } from "react-icons/bi";
 import { IoIosLogOut } from "react-icons/io";
 import { Link, NavLink, useLocation } from "react-router-dom";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../AuthProvider/AuthProvider";
 
 const Navbar = () => {
@@ -22,6 +22,16 @@ const Navbar = () => {
             <li><NavLink className={location.pathname === '/customerservice' ? 'text-[#e50010] font-bold' : ""} to={"/customerservice"}>Customer Service</NavLink></li>
             <li><NavLink className={location.pathname === '/aboutus' ? 'text-[#e50010] font-bold' : ""} to={"/aboutus"}>About Us</NavLink></li>
         </>
+
+    const [theme, setTheme] = useState(true);
+
+    useEffect(() => {
+        theme ? document.querySelector('html').setAttribute("data-theme", "light") : document.querySelector('html').setAttribute("data-theme", "dark")
+    }, [theme])
+
+    const handleLight = () => {
+        setTheme(!theme)
+    }
 
     return (
         <div>
@@ -62,6 +72,7 @@ const Navbar = () => {
                     {
                         <Link to={`/mycart/`}><div className="flex items-center"><BsBag className="text-2xl mr-2 font-bold"></BsBag><p className="font-semibold"><span className="hidden xl:flex">Cart</span></p></div></Link>
                     }
+                    <button onClick={handleLight}><BsLightbulb className="text-3xl"></BsLightbulb></button>
                 </div>
             </div>
             <div className="hidden lg:flex justify-center">

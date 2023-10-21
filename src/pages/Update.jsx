@@ -19,7 +19,7 @@ const Update = () => {
         const newProduct = { brand, product, type, price, rating, photo, description }
         console.log(newProduct);
 
-        fetch(`http://localhost:5000/update/${mdata.product}`, {
+        fetch(`https://randf-server.vercel.app/update/${mdata.product}`, {
             method: "PUT",
             headers: {
                 "content-type" : "application/json"
