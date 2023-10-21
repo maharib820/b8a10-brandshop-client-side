@@ -19,11 +19,13 @@ import PrivateRoute from './Private/PrivateRoute';
 import Details from './pages/Details';
 import MyCart from './pages/MyCart';
 import Update from './pages/Update';
+import ErrorPage from './pages/ErrorPage';
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Root></Root>,
+    errorElement: <ErrorPage></ErrorPage>,
     children: [
       {
         path: "/",
@@ -40,7 +42,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/customerservice",
-        element: <CustomerService></CustomerService>
+        element: <PrivateRoute><CustomerService></CustomerService></PrivateRoute>
       },
       {
         path: "/aboutus",
@@ -48,11 +50,11 @@ const router = createBrowserRouter([
       },
       {
         path: "/membership",
-        element: <Membership></Membership>
+        element: <PrivateRoute><Membership></Membership></PrivateRoute>
       },
       {
         path: "/addproduct",
-        element: <AddProduct></AddProduct>,
+        element: <PrivateRoute><AddProduct></AddProduct></PrivateRoute>,
         loader: () => fetch("/Brands.json")
       },
       {
@@ -71,7 +73,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/myupdate/:product",
-        element: <Update></Update>,
+        element: <PrivateRoute><Update></Update></PrivateRoute>,
         loader: ({params}) => fetch(`http://localhost:5000/update/${params.product}`)
       }
     ]

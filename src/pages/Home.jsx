@@ -1,5 +1,10 @@
-import { useLoaderData } from 'react-router-dom';
+import { Link, useLoaderData } from 'react-router-dom';
 import BrandCart from '../components/BrandCart';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+import { Navigation, Pagination, Mousewheel, Keyboard } from 'swiper/modules';
 
 const Home = () => {
 
@@ -22,6 +27,38 @@ const Home = () => {
                 {
                     brands.length && brands.map(brand => <BrandCart key={brand.id} brand={brand}></BrandCart>)
                 }
+            </div>
+            <div>
+                <div className=''>
+                    <div className="w-full lg:w-2/4 mx-auto mt-5">
+                        <Swiper
+                            cssMode={true}
+                            navigation={true}
+                            pagination={true}
+                            mousewheel={true}
+                            keyboard={true}
+                            modules={[Navigation, Pagination, Mousewheel, Keyboard]}
+                            className="mySwiper"
+                        >
+                            {
+                                brands.map((brand, index) => <SwiperSlide key={index}>
+                                    <div className='relative'> 
+                                        <img src={brand.brandImage} alt="" />
+                                        <Link to={`/brands/${brand.brandName}`}><button className='btn mb-8 bg-[#e50010] text-white  '>Explore {brand.brandName} Products</button></Link>
+                                    </div>
+                                </SwiperSlide>)
+                            }
+                        </Swiper>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div className='w-full bg-[#9D4AF6] h-[300px] my-20'>
+                    <div className='flex justify-center items-center w-full h-full'>
+                        <input className='w-1/2 h-12 rounded-l-full pl-5' placeholder='subscribe to get amazing offer' type="text" />
+                        <button className='btn rounded-l-none rounded-r-full bg-[#e50010] text-white'>Subscribe</button>
+                    </div>
+                </div>
             </div>
         </div>
     );

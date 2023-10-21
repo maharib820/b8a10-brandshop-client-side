@@ -1,13 +1,15 @@
 import { useContext } from "react";
-import { Link, useLoaderData } from "react-router-dom";
+import { useLoaderData } from "react-router-dom";
 import { AuthContext } from "../AuthProvider/AuthProvider";
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Details = () => {
 
     const data = useLoaderData()[0];
-    const p = data.product;
     const { user } = useContext(AuthContext);
+
+    const notify = () => toast("Product add on cart", {position: toast.POSITION.TOP_CENTER});
 
     const handleCart = () => {
         console.log(user.email);
@@ -18,13 +20,16 @@ const Details = () => {
         fetch("http://localhost:5000/cart", {
             method: "POST",
             headers: {
-                "content-type" : "application/json"
+                "content-type": "application/json"
             },
             body: JSON.stringify(iCart)
         })
             .then(res => res.json())
             .then(data => {
-                // console.log(data);
+                console.log(data);
+                if (data.acknowledged) {
+                    notify();
+                }
             })
     }
 
@@ -41,8 +46,8 @@ const Details = () => {
                 <p className="font-bold">Rating {data.rating}</p>
                 <p className="font-bold">Description: {data.description}</p>
                 <button onClick={handleCart} className="btn bg-red-600 text-white">Add Cart</button>
-                <Link to={`/myupdate/${p}`}><button className="btn bg-red-600 text-white">Update</button></Link>
             </div>
+            <ToastContainer />
         </div>
     );
 };
